@@ -13,7 +13,10 @@ public interface Utils {
     List<Integer> REVERSED_NUMBERS = Arrays.asList(9, 8, 7, 6, 5, 4, 3, 2, 1);
     List<Integer> BIGGER_NUMBERS = Arrays.asList(101, 102, 103, 104, 105, 106, 107, 108, 109);
 
-    List<String> CITIES = Arrays.asList("Arad", "Timisoara", "Cluj", "Slatina", null, "Curtea de Arges", "Vaslui Rullz",
+    List<String> CITIES = Arrays.asList("Arad", "Timisoara", "Cluj", "Slatina", "La Rochelle", "Curtea de Arges", "Vaslui Rullz",
+            "Campina", "Barlad", "Bucuresti");
+
+    List<String> CITIES_WITH_NULL = Arrays.asList("Arad", "Timisoara", "Cluj", null, "La Rochelle", "Curtea de Arges", "Vaslui Rullz",
             "Campina", "Barlad", "Bucuresti");
 
 
@@ -28,7 +31,7 @@ public interface Utils {
         }
     }
 
-    static <V> Flux<V> getIterableAtInterval(Iterable<V> iterable, int i) {
+    static <V> Flux<V> getFluxFromAtInterval(Iterable<V> iterable, int i) {
         return Flux.fromIterable(iterable)
                 .zipWith(Flux.interval(Duration.ofSeconds(i)))
                 .map(Tuple2::getT1);
@@ -36,7 +39,7 @@ public interface Utils {
 
 
     public static void main(String[] args) throws InterruptedException {
-        getIterableAtInterval(CITIES, 1).subscribe(System.out::println, e -> System.out.println(e), () -> System.out.println("s-a terminat"));
+        getFluxFromAtInterval(CITIES, 1).subscribe(System.out::println, e -> System.out.println(e), () -> System.out.println("s-a terminat"));
         Thread.currentThread().join();
     }
 }
