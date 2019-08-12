@@ -11,8 +11,8 @@ public class CombineOperations {
 
     public static void main(String[] args) throws InterruptedException {
         CombineOperations op = new CombineOperations();
-//        op.combineLatest().subscribe(System.out::println);
-        op.withLastestFrom().subscribe(System.out::println);
+        op.combineLatest().subscribe(System.out::println);
+//        op.withLastestFrom().subscribe(System.out::println);
 //        op.merge().subscribe(System.out::println);
 //        op.mergeOrdered().subscribe(System.out::println);
 //        op.zip().subscribe(System.out::println);
@@ -24,8 +24,8 @@ public class CombineOperations {
 
 
     private Flux<String> combineLatest() {
-        return Flux.combineLatest(getFluxFromAtInterval(NUMBERS, 1),
-                getFluxFromAtInterval(BIGGER_NUMBERS, 2),
+        return Flux.combineLatest(getFluxFromAtInterval(NUMBERS, 2),
+                getFluxFromAtInterval(BIGGER_NUMBERS, 1),
                 (nr, city) -> "Combine latest: " + nr + "-" + city);
     }
 
